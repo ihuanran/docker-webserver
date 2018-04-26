@@ -1,0 +1,63 @@
+version: '3'
+
+
+services:
+
+  mysql:
+    image: mysql:${MYSQL_VERSION}
+    container_name: mysql
+    ports:
+      - 3306:${MYSQL_PORT}
+    volumes:
+      - ${APP_LOCATION}${MYSQL_DATA_DIR}:/var/lib/mysql
+      - ${APP_LOCATION}${MYSQL_DATA_DIR}:/etc/mysql/conf.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+
+  redis:
+    image: huanran/redis:1.0
+    build: ./redis
+    container_name: redis
+    ports:
+      - 6379:${REDIS_PORT}
+    volumes:
+      - ${APP_LOCATION}${REDIS_DATA_DIR}:/data
+      - ${APP_LOCATION}${REDIS_CONF_FILE}:/usr/local/etc/redis/custom.conf
+
+  php:
+    image: huanran/php:1.0
+    build:
+      context: ./php
+      args:
+        - app_env=${APP_ENV}
+    container_name: php
+    ports:
+      - 9000:${PHP_PORT}
+    volumes:
+      - ${APP_LOCATION}${PHP_LOG_DIR}:/log
+      - ${APP_LOCATION}${PHP_INI_FILE}:/usr/local/etc/php/conf.d/php.ini
+      - ${APP_LOCATION}${WORKSPACE}:/usr/share/nginx/html
+    links:
+      - mysql
+      - redis
+    depends_on:
+      - mysql
+      - redis
+
+  nginx:
+    image: huanran/nginx:1.0
+    build:
+      context: ./nginx
+    container_name: nginx
+    ports:
+      - 80:${NGINX_PORT}
+      - 443:${NGINX_HTTPS_PORT}
+    volumes:
+      - ${APP_LOCATION}${NGINX_LOG_DIR}:/var/log/nginx
+      - ${APP_LOCATION}${$NGINX_CONF_FILE}:/etc/nginx/nginx.conf
+      - ${APP_LOCATION}${NGINX_HOST_CONF_DIR}:/etc/nginx/conf.d
+      - ${APP_LOCATION}${WORKSPACE}:/usr/share/nginx/html
+    links:
+      - php
+    depends_on:
+      - php
