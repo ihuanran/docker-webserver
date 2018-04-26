@@ -54,7 +54,7 @@ services:
       - 443:${NGINX_HTTPS_PORT}
     volumes:
       - ${APP_LOCATION}${NGINX_LOG_DIR}:/var/log/nginx
-      - ${APP_LOCATION}${$NGINX_CONF_FILE}:/etc/nginx/nginx.conf
+      - ${APP_LOCATION}${NGINX_CONF_FILE}:/etc/nginx/nginx.conf
       - ${APP_LOCATION}${NGINX_HOST_CONF_DIR}:/etc/nginx/conf.d
       - ${APP_LOCATION}${WORKSPACE}:/usr/share/nginx/html
     links:
