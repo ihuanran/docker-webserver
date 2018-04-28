@@ -1,0 +1,16 @@
+version: '2'
+
+
+services:
+
+  php:
+    volumes:
+      - applications-docker-sync:/usr/share/nginx/html:nocopy
+
+  nginx:
+    volumes:
+      - applications-docker-sync:/usr/share/nginx/html:nocopy
+
+volumes:
+  applications-docker-sync:
+    external: true

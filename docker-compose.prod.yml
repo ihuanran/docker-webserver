@@ -1,0 +1,12 @@
+version: '2'
+
+
+services:
+
+  php:
+    volumes:
+      - ${APP_LOCATION}${WORKSPACE}:/usr/share/nginx/html
+
+  nginx:
+    volumes:
+      - ${APP_LOCATION}${WORKSPACE}:/usr/share/nginx/html

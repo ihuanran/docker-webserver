@@ -1,0 +1,16 @@
+version: '2'
+
+
+options:
+  verbose: false
+
+syncs:
+  applications-docker-sync:
+    compose-dev-file-path: 'docker-compose.override.yml'
+
+    src: '${DOCKER_SYNC_SRC}'
+
+    sync_args: ['-perms=0']
+    sync_userid: '${DOCKER_SYNC_USERID}'
+    sync_strategy: '${DOCKER_SYNC_STRATEGY}'
+    sync_excludes: ['.gitignore', '.git/*', '.history/*', '.idea/*', '.vscode/*', '.svn/*']

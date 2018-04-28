@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 
 
 services:
@@ -36,7 +36,6 @@ services:
     volumes:
       - ${APP_LOCATION}${PHP_LOG_DIR}:/log
       - ${APP_LOCATION}${PHP_INI_FILE}:/usr/local/etc/php/conf.d/php.ini
-      - ${APP_LOCATION}${WORKSPACE}:/usr/share/nginx/html
     links:
       - mysql
       - redis
@@ -56,7 +55,6 @@ services:
       - ${APP_LOCATION}${NGINX_LOG_DIR}:/var/log/nginx
       - ${APP_LOCATION}${NGINX_CONF_FILE}:/etc/nginx/nginx.conf
       - ${APP_LOCATION}${NGINX_HOST_CONF_DIR}:/etc/nginx/conf.d
-      - ${APP_LOCATION}${WORKSPACE}:/usr/share/nginx/html
     links:
       - php
     depends_on:
