@@ -13,6 +13,9 @@ services:
       - ${APP_LOCATION}${MYSQL_DATA_DIR}:/etc/mysql/conf.d
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+    logging:
+      options:
+        max-size: "${MYSQL_MAX_SIZE}"
 
   redis:
     image: huanran/redis:1.0
@@ -23,6 +26,9 @@ services:
     volumes:
       - ${APP_LOCATION}${REDIS_DATA_DIR}:/data
       - ${APP_LOCATION}${REDIS_CONF_FILE}:/usr/local/etc/redis/custom.conf
+    logging:
+      options:
+        max-size: "${REDIS_MAX_SIZE}"
 
   php:
     image: huanran/php:1.0
@@ -36,6 +42,9 @@ services:
     volumes:
       - ${APP_LOCATION}${PHP_LOG_DIR}:/log
       - ${APP_LOCATION}${PHP_INI_FILE}:/usr/local/etc/php/conf.d/php.ini
+    logging:
+      options:
+        max-size: "${PHP_MAX_SIZE}"
     links:
       - mysql
       - redis
@@ -55,6 +64,9 @@ services:
       - ${APP_LOCATION}${NGINX_LOG_DIR}:/var/log/nginx
       - ${APP_LOCATION}${NGINX_CONF_FILE}:/etc/nginx/nginx.conf
       - ${APP_LOCATION}${NGINX_HOST_CONF_DIR}:/etc/nginx/conf.d
+    logging:
+      options:
+        max-size: "${NGINX_MAX_SIZE}"
     links:
       - php
     depends_on:
