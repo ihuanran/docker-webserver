@@ -8,7 +8,7 @@ syncs:
   applications-docker-sync:
     compose-dev-file-path: 'docker-compose.override.yml'
 
-    src: '${DOCKER_SYNC_SRC}:${APP_LOCATION}${WORKSPACE}'
+    src: '${DOCKER_SYNC_SRC}'
 
     sync_args: ['-perms=0']
     sync_userid: '${DOCKER_SYNC_USERID}'
