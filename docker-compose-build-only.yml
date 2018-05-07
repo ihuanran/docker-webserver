@@ -1,11 +1,9 @@
-version: '2'
+#version: '2'
 # The following service only builds the image and does not run the container.
 # run "docker-compose -f docker-compose-build-only.yml build"
 
-services:
-
-  composer:
-      image: huanran/composer
-      build:
-        context: ./composer
-      container_name: composer
+#services:
+#
+#  composer:
+#      image: composer
+#      container_name: composer

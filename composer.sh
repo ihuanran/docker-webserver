@@ -30,52 +30,6 @@ display_options () {
     printf "and the other composer command.\n"
 }
 
-isCommand() {
-  for cmd in \
-    "about" \
-    "archive" \
-    "browse" \
-    "clear-cache" \
-    "clearcache" \
-    "config" \
-    "create-project" \
-    "depends" \
-    "diagnose" \
-    "dump-autoload" \
-    "dumpautoload" \
-    "exec" \
-    "global" \
-    "help" \
-    "home" \
-    "info" \
-    "init" \
-    "install" \
-    "licenses" \
-    "list" \
-    "outdated" \
-    "prohibits" \
-    "remove" \
-    "require" \
-    "run-script" \
-    "search" \
-    "self-update" \
-    "selfupdate" \
-    "show" \
-    "status" \
-    "suggests" \
-    "update" \
-    "validate" \
-    "why" \
-    "why-not"
-  do
-    if [ -z "${cmd#"$1"}" ]; then
-      return 0
-    fi
-  done
-
-  return 1
-}
-
 runDir='';
 
 if [[ $# -eq 0 ]] ; then
@@ -88,13 +42,7 @@ else
     runDir=$2
 fi
 
-if ! isCommand "$1"; then
-    print_style "Invalid arguments.\n" "danger"
-    display_options
-    exit 1
-fi
-
-command="docker run --rm --interactive --tty --volume /tmp:/tmp --volume $runDir:/app huanran/composer $1"
+command="docker run --rm --interactive --tty --volume $COMPOSER_HOME:/tmp --volume $runDir:/app composer $1"
 
 print_style "run the command:";
 print_style "$command\n" "success";

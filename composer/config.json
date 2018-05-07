@@ -1,0 +1,11 @@
+{
+    "_annotation":"将这文件手动复制到应用目录的composer下，可以自定义配置。同时请将composer目录设为COMPOSER_HOME环境变量。",
+
+    "config": {},
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    }
+}
