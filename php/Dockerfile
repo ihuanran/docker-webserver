@@ -10,6 +10,7 @@ RUN docker-php-ext-install pdo_mysql \
     && mkdir /log \
     && mkdir -p /usr/share/nginx/html
 
+WORKDIR /usr/share/nginx/html
 VOLUME /log /usr/share/nginx/html
 EXPOSE 9000
 
