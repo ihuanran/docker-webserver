@@ -6,6 +6,7 @@ services:
   mysql:
     image: mysql:${MYSQL_VERSION}
     container_name: mysql
+    restart: always
     ports:
       - 3306:${MYSQL_PORT}
     volumes:
@@ -21,6 +22,7 @@ services:
     image: huanran/redis:1.0
     build: ./redis
     container_name: redis
+    restart: always
     ports:
       - 6379:${REDIS_PORT}
     volumes:
@@ -37,6 +39,7 @@ services:
       args:
         - app_env=${APP_ENV}
     container_name: php
+    restart: always
     ports:
       - 9000:${PHP_PORT}
     volumes:
@@ -57,6 +60,7 @@ services:
     build:
       context: ./nginx
     container_name: nginx
+    restart: always
     ports:
       - 80:${NGINX_PORT}
       - 443:${NGINX_HTTPS_PORT}
