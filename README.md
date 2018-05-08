@@ -1,14 +1,14 @@
-#docker-webserver
+# docker-webserver
 
 使用docker构建web环境，目前包括nginx，php(composer)，mysql，redis
 
-##使用
+## 使用
 
 先安装docker，docker-compose
 
 复制.env.example，并改名为.env，修改相应的配置
 
-####开发环境
+#### 开发环境
 
 以下命令将使用`docker-compose.yml`和`docker-compose.override.yml`文件配置，后者会覆盖前者配置，具体参考[docker-compose](https://docs.docker.com/compose/extends/)文档。
 
@@ -28,7 +28,7 @@ docker-compose up -d
 ./web.sh clean      清除文件
 ```
 
-####生产环境
+#### 生产环境
 
 以下命令将使用`docker-compose.yml`和`docker-compose.prod.yml`文件配置，后者会覆盖前者配置。
 
@@ -37,13 +37,13 @@ docker-compose build
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
-##应用路径
+## 应用路径
 
 运行服务之前须得按.env里设置的路径一样在主机创建好相应的目录。
 
 查看[.env.example](./.env.example)的建议路径
 
-##关于php-composer
+## 关于php-composer
 
 composer直接使用官方镜像，所以直接接取官方镜像即可
 
