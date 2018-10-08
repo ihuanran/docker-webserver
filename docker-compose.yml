@@ -45,6 +45,8 @@ services:
     volumes:
       - ${APP_LOCATION}${PHP_LOG_DIR}:/log
       - ${APP_LOCATION}${PHP_INI_FILE}:/usr/local/etc/php/conf.d/php.ini
+    environment:
+      - SWOOLE_VERSION=${SWOOLE_VERSION}
     logging:
       options:
         max-size: "${PHP_MAX_SIZE}"

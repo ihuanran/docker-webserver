@@ -1,5 +1,7 @@
 FROM php:7.2-fpm
 
+ENV SWOOLE_VERSION=4.1.2
+
 ARG app_env=development
 
 COPY php.ini-$app_env /usr/local/etc/php
@@ -16,6 +18,8 @@ RUN apt-get update \
 	&& docker-php-ext-install -j$(nproc) gd \
 	&& docker-php-ext-install zip \
 	&& docker-php-ext-install bcmath \
+	&& pecl install swoole-$SWOOLE_VERSION \
+    && docker-php-ext-enable swoole \
 	&& mv /usr/local/etc/php/php.ini-$app_env /usr/local/etc/php/php.ini \
     && mkdir /log \
     && mkdir -p /usr/share/nginx/html
