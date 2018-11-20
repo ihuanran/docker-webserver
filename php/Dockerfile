@@ -20,6 +20,7 @@ RUN apt-get update \
 	&& docker-php-ext-install bcmath \
 	&& pecl install swoole-$SWOOLE_VERSION \
     && docker-php-ext-enable swoole \
+    && docker-php-ext-install sockets \
 	&& mv /usr/local/etc/php/php.ini-$app_env /usr/local/etc/php/php.ini \
     && mkdir /log \
     && mkdir -p /usr/share/nginx/html
