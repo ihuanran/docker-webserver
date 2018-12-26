@@ -11,7 +11,7 @@ services:
       - 3306:${MYSQL_PORT}
     volumes:
       - ${APP_LOCATION}${MYSQL_DATA_DIR}:/var/lib/mysql
-      - ${APP_LOCATION}${MYSQL_DATA_DIR}:/etc/mysql/conf.d
+      - ${APP_LOCATION}${MYSQL_CONF_DIR}:/etc/mysql/conf.d
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
     logging:
