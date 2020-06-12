@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.3-fpm
 
 ENV SWOOLE_VERSION=4.1.2
 
@@ -13,6 +13,7 @@ RUN apt-get update \
         libjpeg62-turbo-dev \
         libpng-dev \
         zlib1g-dev \
+        libzip-dev \
 	&& docker-php-ext-install pdo_mysql \
 	&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
 	&& docker-php-ext-install -j$(nproc) gd \
