@@ -5,12 +5,8 @@ services:
 
   php:
     volumes:
-      - applications-docker-sync:/usr/share/nginx/html:nocopy
+      - ${APP_LOCATION}${WORKSPACE}:/usr/share/nginx/html
 
   nginx:
     volumes:
-      - applications-docker-sync:/usr/share/nginx/html:nocopy
-
-volumes:
-  applications-docker-sync:
-    external: true
+      - ${APP_LOCATION}${WORKSPACE}:/usr/share/nginx/html
